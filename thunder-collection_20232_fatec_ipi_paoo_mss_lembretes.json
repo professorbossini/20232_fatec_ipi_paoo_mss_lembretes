@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "20232_fatec_ipi_paoo_mss_lembretes",
-    "dateExported": "2023-09-20T19:19:54.938Z",
+    "dateExported": "2023-10-18T18:48:51.711Z",
     "version": "1.1",
     "folders": [
         {
@@ -17,7 +17,7 @@
             "_id": "1b582bb5-e5ba-4c23-99a8-11a611aa1708",
             "colId": "4505bead-4cc3-49e2-8c6e-bb26284381fb",
             "containerId": "4bb8bb6b-6866-44d5-828d-998ef49f7b7f",
-            "name": "localhost:4000/lembretes",
+            "name": "Obter lembretes",
             "url": "localhost:4000/lembretes",
             "method": "GET",
             "sortNum": 10000,
@@ -25,6 +25,25 @@
             "modified": "2023-09-20T19:18:40.486Z",
             "headers": [],
             "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a1379e24-f530-479a-8db7-e00c1163c554",
+            "colId": "4505bead-4cc3-49e2-8c6e-bb26284381fb",
+            "containerId": "4bb8bb6b-6866-44d5-828d-998ef49f7b7f",
+            "name": "Salvar lembrete",
+            "url": "localhost:4000/lembretes",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-09-20T19:58:34.030Z",
+            "modified": "2023-09-20T20:02:13.162Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"texto\": \"Fazer café\"\n}",
+                "form": []
+            },
             "tests": []
         }
     ]
