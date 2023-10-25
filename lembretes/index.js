@@ -18,16 +18,27 @@ const lembretes = {}
 let id = 1
 
 //GET /lembretes
-app.get('/lembretes', (req, res) => {
-  res.send(lembretes)  
+app.get('/lembretes', (req, res) => res.send(lembretes))  
+
+//POST /eventos
+app.post('/eventos', (req, res) => {
+  const evento = req.body
+  console.log(evento)
+  res.status(200).end() 
 })
 
 //POST /lembretes {texto: "Fazer cafe"}
-app.post('/lembretes', (req, res) => {
+app.post('/lembretes', async (req, res) => {
   const texto = req.body.texto
   const lembrete = {id, texto}
   lembretes[id] = lembrete
   id++
+  //isso é a emissão de um evento
+  //ou seja, só uma requisição HTTP
+  await axios.post('http://localhost:10000/eventos', {
+    type: "LembreteCriado",
+    payload: lembrete
+  })
   // HTTP 201 Created
   res.status(201).send(lembrete)
 })

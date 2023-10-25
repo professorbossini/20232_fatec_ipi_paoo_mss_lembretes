@@ -32,23 +32,31 @@ app.get(
   }
 )
 
+//POST /eventos
+app.post('/eventos', (req, res) => {
+  const evento = req.body
+  console.log(evento)
+  res.status(200).end()
+})
+
 //POST /lembretes/1/observacoes
 app.post(
   '/lembretes/:id/observacoes',
-  function(req, res){
-    //1. Gerar um uuid (identificador)
+  async function(req, res){
     const idObs = uuidv4()
-    //2. Extrair o texto da observação do corpo da requisição
     const { texto } = req.body 
-    //3. Pegar o id do lembrete envolvido na operação
     const idLembrete = req.params.id
-    //4. Das duas uma: pegar a coleção de observações já associada a esse lembrete ou, se ainda não houver uma, criar uma
     const observacoesDoLembrete = observacoesPorLembreteId[idLembrete] || []
-    //5. Adicionar uma observação a essa coleção, composta pelo texto extraído do corpo da requisição e pelo id gerado via uuid
     observacoesDoLembrete.push({id: idObs, texto: texto})
-    //6. Atualizar a base para que ela referencie a potencialmente nova coleção
     observacoesPorLembreteId[idLembrete] = observacoesDoLembrete
-    //7. Responder ao cliente com código 201 Created, supondo que tudo deu certo
+    await axios.post('http://localhost:10000/eventos', {
+      type: 'ObservacaoCriada',
+      payload: {
+        id: idObs,
+        texto: texto,
+        lembreteId: idLembrete
+      }
+    })
     res.status(201).send(observacoesDoLembrete)
   }
 )

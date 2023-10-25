@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "20232_fatec_ipi_paoo_mss_lembretes",
-    "dateExported": "2023-10-18T18:48:51.711Z",
+    "dateExported": "2023-10-25T21:23:49.702Z",
     "version": "1.1",
     "folders": [
         {
@@ -10,6 +10,20 @@
             "containerId": "",
             "created": "2023-09-20T19:17:58.241Z",
             "sortNum": 10000
+        },
+        {
+            "_id": "61ec5102-115b-4065-b438-c7aef7877412",
+            "name": "observacoes",
+            "containerId": "",
+            "created": "2023-10-25T21:03:31.927Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "fd77098a-e80c-4a07-af11-cc8cab7a7aec",
+            "name": "consulta",
+            "containerId": "",
+            "created": "2023-10-25T21:07:51.871Z",
+            "sortNum": 40000
         }
     ],
     "requests": [
@@ -44,6 +58,39 @@
                 "raw": "{\n  \"texto\": \"Fazer café\"\n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "e6513902-defb-48a4-87ab-05a0fd914ea3",
+            "colId": "4505bead-4cc3-49e2-8c6e-bb26284381fb",
+            "containerId": "61ec5102-115b-4065-b438-c7aef7877412",
+            "name": "Salvar observação por lembrete",
+            "url": "localhost:5000/lembretes/1/observacoes",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-10-25T21:04:10.618Z",
+            "modified": "2023-10-25T21:10:44.004Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"texto\": \"De manhã\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "be230e57-a745-43ce-a56e-0fb0af957151",
+            "colId": "4505bead-4cc3-49e2-8c6e-bb26284381fb",
+            "containerId": "fd77098a-e80c-4a07-af11-cc8cab7a7aec",
+            "name": "Obter base consolidada",
+            "url": "localhost:6000/lembretes",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-10-25T21:08:42.470Z",
+            "modified": "2023-10-25T21:09:11.765Z",
+            "headers": [],
+            "params": [],
             "tests": []
         }
     ]
