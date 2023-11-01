@@ -15,9 +15,13 @@ const funcoes = {
     const observacoes = baseConsolidada[observacao.lembreteId]['observacoes'] || []
     observacoes.push(observacao)
     baseConsolidada[observacao.lembreteId]['observacoes'] = observacoes
-
   },
-
+  ObservacaoAtualizada: (observacao) => {
+    const observacoes = 
+      baseConsolidada[observacao.lembreteId]['observacoes']
+    const indice = observacoes.findIndex(o => o.id === observacao.id)
+    observacoes[indice] = observacao
+  }
 }
 
 //disponibilizar a base consolidada
@@ -29,9 +33,12 @@ app.get('/lembretes', (req, res) => {
 //receber eventos
 //POST /eventos
 app.post('/eventos', (req, res) => {
-  //princípio aberto/fechado
-  const evento = req.body
-  funcoes[evento.type](evento.payload)
+  try{
+    //princípio aberto/fechado
+    const evento = req.body
+    funcoes[evento.type](evento.payload)
+  }
+  catch(e){}
   res.status(200).json(baseConsolidada)
 })
 

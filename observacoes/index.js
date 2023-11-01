@@ -10,6 +10,28 @@ const app = express()
 app.use(express.json())
 
 const observacoesPorLembreteId = {}
+
+const funcoes = {
+  ObservacaoClassificada: async (observacao) => {
+    const observacoes = 
+      observacoesPorLembreteId[observacao.lembreteId]
+    const obsParaAtualizar = observacoes.find(o => o.id === observacao.id)
+    obsParaAtualizar.status = observacao.status
+    await axios.post(
+      'http://localhost:10000/eventos', 
+      {
+        type: 'ObservacaoAtualizada',
+        payload: {
+          id: observacao.id,
+          texto: observacao.texto,
+          lembreteId: observacao.lembreteId,
+          status: observacao.status
+        }
+      }
+    )
+  }
+}
+
 /*
 {
   "1": [
@@ -34,8 +56,12 @@ app.get(
 
 //POST /eventos
 app.post('/eventos', (req, res) => {
-  const evento = req.body
-  console.log(evento)
+  try{
+    const evento = req.body
+    console.log(evento)
+    funcoes[req.body.type](req.body.payload)
+  }
+  catch(e){}
   res.status(200).end()
 })
 
@@ -54,7 +80,8 @@ app.post(
       payload: {
         id: idObs,
         texto: texto,
-        lembreteId: idLembrete
+        lembreteId: idLembrete,
+        status: 'aguardando'
       }
     })
     res.status(201).send(observacoesDoLembrete)
