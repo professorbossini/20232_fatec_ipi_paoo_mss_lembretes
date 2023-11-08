@@ -1,5 +1,7 @@
 require('dotenv').config()
+const axios = require('axios')
 const express = require ('express')
+
 const app = express()
 app.use(express.json())
 
@@ -45,5 +47,17 @@ app.post('/eventos', (req, res) => {
 
 app.listen(
   PORT,
-  () => console.log(`Consulta: ${PORT}`)
+  async () => {
+    console.log(`Consulta: ${PORT}`)
+    const eventos = await axios.get('http://localhost:10000/eventos')
+    eventos.data.forEach((valor, indice, colecao) => {
+      // try{
+      //   undefined()
+      // }
+      // catch(e){}
+      if(funcoes[valor.type]){
+        funcoes[valor.type](valor.payload)
+      }
+    })
+  }
 )
